@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="InterTail.ChangeColorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="200"
+        Width="300">
+    <StackPanel>
+        <!-- todo: color picker -->
+        <Label>Color:</Label>
+        <TextBox x:Name="Color"/>
+    </StackPanel>
+</UserControl>
