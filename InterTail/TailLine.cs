@@ -50,14 +50,14 @@ namespace InterTail
             }
         }
 
-        private Brush _bgColor;
-        public Brush BgColor
+        private Brush _bgBrush;
+        public Brush BgBrush
         {
-            get { return _bgColor; }
+            get { return _bgBrush; }
             set
             {
-                _bgColor = value;
-                NotifyOfPropertyChange(() => BgColor);
+                _bgBrush = value;
+                NotifyOfPropertyChange(() => BgBrush);
             }
         }
 
@@ -66,8 +66,7 @@ namespace InterTail
             Timestamp = timeStamp;
             Folder = folder;
             File = file;
-            BgColor = backgroundBrush;
-            BgColor.Freeze();
+            BgBrush = backgroundBrush;
             Text = text;
         }
     }

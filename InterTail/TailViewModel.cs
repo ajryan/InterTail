@@ -11,25 +11,25 @@ namespace InterTail
     {
         private readonly IWindowManager _windowManager;
         private readonly object _linesLock = new object();
-        private readonly List<TailReader> _tailReaders = new List<TailReader>();
+        private readonly TailReader _tailReader;
         
         [ImportingConstructor]
         public TailViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
+            _tailReader = new TailReader(this);
         }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
             DisplayName = "InterTail";
+            _tailReader.RunAsync();
         }
 
         protected override void OnDeactivate(bool close)
         {
-            foreach (var reader in _tailReaders)
-                reader.Exit();
-
+            _tailReader.Exit();
             base.OnDeactivate(close);
         }
 
@@ -89,7 +89,6 @@ namespace InterTail
                 return;
 
             _windowManager.ShowDialog(new ChangeColorViewModel(SelectedFile));
-            //SelectedFile.BgColor = Brushes.Red;
         }
 
         public void LoadFile()
@@ -105,18 +104,14 @@ namespace InterTail
             if (selected != true)
                 return;
 
-            foreach (var fileName in openFileDialog.FileNames)
+            foreach (var filePath in openFileDialog.FileNames)
             {
-                if (Files.Any(f => f.FileName == fileName))
+                if (Files.Any(f => f.FilePath == filePath))
                     continue;
 
-                var reader = new TailReader(fileName);
-                
-
-                Files.Add(new TailFile { FileName=fileName, BgColor = reader.BgBrush });
-                
-                _tailReaders.Add(reader);
-                reader.Run(this);
+                var tailFile = new TailFile(filePath);
+                Files.Add(tailFile);
+                _tailReader.AddFile(tailFile);
             }
         }
 

@@ -33,7 +33,7 @@
                 <DataGridTemplateColumn x:Name="Text" Header="Text">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Text}" Background="{Binding BgColor}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Text}" Background="{Binding BgBrush}" TextWrapping="Wrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -51,7 +51,7 @@
                 <ListBox DockPanel.Dock="Top" x:Name="Files" Margin="0 0 0 5">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="local:TailFile">
-                            <TextBlock x:Name="FileName" Text="{Binding FileName}" Background="{Binding BgColor}" />
+                            <TextBlock x:Name="FileName" Text="{Binding FilePath}" Background="{Binding BgBrush}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

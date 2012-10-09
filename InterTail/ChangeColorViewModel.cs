@@ -27,13 +27,13 @@ namespace InterTail
             set
             {
                 _color = value;
-                //if (Enum.TryParse(_color, out ))
+                // TODO: cache this list... or make a real color picker
                 foreach (var property in typeof(Colors).GetProperties())
                 {
                     if (property.Name.Equals(_color, StringComparison.OrdinalIgnoreCase))
                     {
                         var newFileColor = (Color) property.GetValue(null, null);
-                        _file.BgColor = new SolidColorBrush(newFileColor);
+                        _file.BgBrush = new SolidColorBrush(newFileColor);
                     }
                 }
                 NotifyOfPropertyChange(() => Color);
